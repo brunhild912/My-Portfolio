@@ -71,7 +71,7 @@ class buildProjectContainer extends StatelessWidget {
       width: screenWidth * 0.2,
       height: screenHeight * 0.4,
       decoration: BoxDecoration(
-        color: Color(0xff080D26),
+        color: MyColors.seamless,
         border: Border.all(width: 1.0, color: Color(0xff1D2541)),
       ),
       child: Center(

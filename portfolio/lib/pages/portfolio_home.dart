@@ -40,7 +40,7 @@ class _PortfolioHomePageState extends State<PortfolioHomePage> {
               height: screenHeight * 0.7,
               width: screenWidth * 0.9,
               decoration: BoxDecoration(
-                border: Border.all(width: 8.0, color: MyColors.accent1),
+                // border: Border.all(width: 8.0, color: MyColors.accent1),
                 borderRadius: BorderRadius.circular(15),
               ),
               child: Row(
@@ -143,10 +143,10 @@ class _PortfolioHomePageState extends State<PortfolioHomePage> {
 
                   // Image Section - Right
                   SizedBox(
-                    width: screenWidth * 0.3,
+                    width: screenWidth * 0.4,
                     height: screenHeight * 0.5,
                     child: Image.asset(
-                      'assets/images/home.png',
+                      'assets/images/home2.png',
                       width: screenWidth * 0.4,
                       height: screenHeight * 0.4,
                       fit: BoxFit.contain,
@@ -162,7 +162,7 @@ class _PortfolioHomePageState extends State<PortfolioHomePage> {
   }
 
   Widget buildSocialIcon(
-      String assetPath, Color iconColor, Function(Color) onHover, String _url) {
+      String assetPath, Color iconColor, Function(Color) onHover, String url) {
     final ValueNotifier<bool> isHovered = ValueNotifier(false);
 
     return ValueListenableBuilder(
@@ -189,7 +189,7 @@ class _PortfolioHomePageState extends State<PortfolioHomePage> {
               ),
               iconSize: 20,
               onPressed: () {
-                _launchUrl(_url);
+                _launchUrl(url);
               },
               hoverColor: Colors.transparent,
             ),

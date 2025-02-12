@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 
 class MyColors {
-  static const Color background = Color(0xff02071E); // Background color
+  static const Color background = Color(0xff01274A); // Background color
   static const Color heading = Color(0xffFFFFFF); // Maroon for headings
   static const Color text = Color(0xFF7F7D7C); // Black for text
   static const Color accent1 = Color(0xFFFB81B0); // Accent 1 Orange
   static const Color text2 = Color(0xffABC9E3);
   static const Color accent2 = Color(0xffEFBC87);
+  static const Color seamless = Color(0xff080D26);
 }
 
 final ThemeData myTheme = ThemeData(

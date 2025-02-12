@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:portfolio/components/color_scheme.dart';
+import 'package:portfolio/components/screen_utils.dart';
 import 'package:portfolio/components/space_widgets.dart';
 import 'package:portfolio/pages/portfolio_home.dart';
 import 'package:portfolio/pages/projects.dart';
@@ -63,25 +64,41 @@ class _PortfolioState extends State<Portfolio> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              _buildNavItem("HOME", 0),
-              addHorizontalSpace(25),
-              _buildNavItem("PORTFOLIO", 1),
-              addHorizontalSpace(40),
-              Container(
-                width: 150,
-                height: 160,
+              _buildNavItem("H O M E", 0),
+              addHorizontalSpace(ScreenUtils.width(context) * 0.04),
+              _buildNavCircle(),
+              addHorizontalSpace(ScreenUtils.width(context) * 0.04),
+              _buildNavItem("P O R T F O L I O", 1),
+              addHorizontalSpace(ScreenUtils.width(context) * 0.04),
+              _buildNavCircle(),
+              addHorizontalSpace(ScreenUtils.width(context) * 0.04),
+              SizedBox(
+                width: ScreenUtils.width(context) * 0.09,
+                height: ScreenUtils.width(context) * 0.09,
                 child: SvgPicture.asset('assets/images/logo-svg.svg'),
               ),
-              addHorizontalSpace(40),
-              _buildNavItem("ACCOMPLISHMENTS", 2),
-              addHorizontalSpace(25),
-              _buildNavItem("CONTACT", 3),
+              addHorizontalSpace(ScreenUtils.width(context) * 0.04),
+              _buildNavCircle(),
+              addHorizontalSpace(ScreenUtils.width(context) * 0.04),
+              _buildNavItem("A W A R D S", 2),
+              addHorizontalSpace(ScreenUtils.width(context) * 0.04),
+              _buildNavCircle(),
+              addHorizontalSpace(ScreenUtils.width(context) * 0.04),
+              _buildNavItem("C O N T A C T", 3),
             ],
           ),
         ),
         centerTitle: true,
       ),
       body: _pages[navigationProvider.selectedIndex],
+    );
+  }
+
+  Icon _buildNavCircle() {
+    return Icon(
+      Icons.circle_rounded,
+      size: 6,
+      color: Color(0xff184E82),
     );
   }
 
@@ -109,6 +126,7 @@ class _PortfolioState extends State<Portfolio> {
                     color: navigationProvider.selectedIndex == index
                         ? MyColors.accent2
                         : MyColors.text2,
+                    fontSize: ScreenUtils.width(context) * 0.008,
                   )),
             ),
           ),
