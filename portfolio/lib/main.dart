@@ -53,6 +53,7 @@ class _PortfolioState extends State<Portfolio> {
   @override
   Widget build(BuildContext context) {
     final navigationProvider = Provider.of<NavigationProvider>(context);
+    final PageController pageController = PageController();
 
     return Scaffold(
       appBar: AppBar(
@@ -64,33 +65,43 @@ class _PortfolioState extends State<Portfolio> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              _buildNavItem("H O M E", 0),
+              _buildNavItem("H O M E", 0, pageController),
               addHorizontalSpace(ScreenUtils.width(context) * 0.04),
               _buildNavCircle(),
               addHorizontalSpace(ScreenUtils.width(context) * 0.04),
-              _buildNavItem("P O R T F O L I O", 1),
+              _buildNavItem("P O R T F O L I O", 1, pageController),
               addHorizontalSpace(ScreenUtils.width(context) * 0.04),
               _buildNavCircle(),
               addHorizontalSpace(ScreenUtils.width(context) * 0.04),
               SizedBox(
-                width: ScreenUtils.width(context) * 0.09,
-                height: ScreenUtils.width(context) * 0.09,
-                child: SvgPicture.asset('assets/images/logo-svg.svg'),
+                width: ScreenUtils.width(context) * 0.07,
+                height: ScreenUtils.width(context) * 0.07,
+                child: SvgPicture.asset(
+                  'assets/images/logo.svg',
+                  fit: BoxFit.contain,
+                ),
               ),
               addHorizontalSpace(ScreenUtils.width(context) * 0.04),
               _buildNavCircle(),
               addHorizontalSpace(ScreenUtils.width(context) * 0.04),
-              _buildNavItem("A W A R D S", 2),
+              _buildNavItem("A W A R D S", 2, pageController),
               addHorizontalSpace(ScreenUtils.width(context) * 0.04),
               _buildNavCircle(),
               addHorizontalSpace(ScreenUtils.width(context) * 0.04),
-              _buildNavItem("C O N T A C T", 3),
+              _buildNavItem("C O N T A C T", 3, pageController),
             ],
           ),
         ),
         centerTitle: true,
       ),
-      body: _pages[navigationProvider.selectedIndex],
+      body: PageView(
+        controller: pageController,
+        scrollDirection: Axis.vertical, // Enables vertical scrolling
+        onPageChanged: (index) {
+          navigationProvider.updateIndex(index); // Updates selected index
+        },
+        children: _pages,
+      ),
     );
   }
 
@@ -103,7 +114,7 @@ class _PortfolioState extends State<Portfolio> {
   }
 
   // Function to create navigation buttons
-  Widget _buildNavItem(String title, int index) {
+  Widget _buildNavItem(String title, int index, PageController pageController) {
     final navigationProvider = Provider.of<NavigationProvider>(context);
     final ValueNotifier<bool> isHovered = ValueNotifier(false);
 
@@ -117,17 +128,26 @@ class _PortfolioState extends State<Portfolio> {
             duration: const Duration(milliseconds: 200),
             scale: hovered ? 1.2 : 1.0, // Zoom effect on hover
             child: TextButton(
-              onPressed: () => navigationProvider.updateIndex(index),
-              child: Text(title,
-                  style: myTheme.appBarTheme.titleTextStyle?.copyWith(
-                    fontWeight: navigationProvider.selectedIndex == index
-                        ? FontWeight.bold
-                        : FontWeight.normal,
-                    color: navigationProvider.selectedIndex == index
-                        ? MyColors.accent2
-                        : MyColors.text2,
-                    fontSize: ScreenUtils.width(context) * 0.008,
-                  )),
+              onPressed: () {
+                navigationProvider.updateIndex(index);
+                pageController.animateToPage(
+                  index,
+                  duration: const Duration(milliseconds: 500),
+                  curve: Curves.easeInOut,
+                );
+              },
+              child: Text(
+                title,
+                style: myTheme.appBarTheme.titleTextStyle?.copyWith(
+                  fontWeight: navigationProvider.selectedIndex == index
+                      ? FontWeight.bold
+                      : FontWeight.normal,
+                  color: navigationProvider.selectedIndex == index
+                      ? MyColors.accent2
+                      : MyColors.text2,
+                  fontSize: ScreenUtils.width(context) * 0.008,
+                ),
+              ),
             ),
           ),
         );

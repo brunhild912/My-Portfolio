@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio/components/color_scheme.dart';
-import 'package:portfolio/components/skillslider.dart';
+import 'package:portfolio/components/screen_utils.dart';
 import 'package:portfolio/components/space_widgets.dart';
 
 class MyProjects extends StatefulWidget {
@@ -16,24 +16,29 @@ class _MyProjectsState extends State<MyProjects> {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.only(
-            left: 16.0, right: 16.0, bottom: 16.0, top: 40.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              "My Skills",
-              style: TextStyle(
-                fontSize: 22,
-                fontWeight: FontWeight.bold,
-                color: Colors.black,
-              ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          // Spacing
+          Container(
+            color: MyColors.accent1,
+            width: ScreenUtils.width(context) * 1,
+            height: ScreenUtils.height(context) * 0.02,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Row(
+                  children: [],
+                ),
+              ],
             ),
-            SizedBox(height: 20), // Spacing
-            SkillsSlider(),
-            addVerticalSpace(40),
-            Row(
+          ),
+          addVerticalSpace(40),
+          Padding(
+            padding: const EdgeInsets.only(
+                left: 16.0, right: 16.0, bottom: 16.0, top: 40.0),
+            child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
@@ -47,8 +52,8 @@ class _MyProjectsState extends State<MyProjects> {
                     screenWidth: screenWidth, screenHeight: screenHeight),
               ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
